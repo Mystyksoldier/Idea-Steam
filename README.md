@@ -17,3 +17,5 @@ Het doel is om in week 14, specifiek op maandag, de Steam-gegevens succesvol te 
 
 ## SMART
 Op maandag in week 14 willen wij door middel van een API de data van Steam succesvol kunnen integreren en aantonen binnen de Steambox.
+
+## Etienne hiero. Bij mij werkt het als je dit leest!!
