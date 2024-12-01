@@ -1,0 +1,22 @@
+fruits = [
+    ["Apple", "Apple Tree"],
+    ["Banana", "Banana Tree"],
+    ["Cherry", "Cherry Tree"],
+    ["Date", "Date Palm Tree"],
+    ["Elderberry", "Elder Tree"],
+    ["Fig", "Fig Tree"],
+    ["Grape", "Grape Vine"],
+    ["Honeydew", "Melon Plant"],
+    ["Indian Fig", "Indian Fig Tree"],
+    ["Jackfruit", "Jackfruit Tree"],
+    ["Kiwi", "Kiwi Vine"],
+    ["Lemon", "Lemon Tree"],
+    ["Mango", "Mango Tree"],
+    ["Nectarine", "Nectarine Tree"],
+    ["Orange", "Orange Tree"],
+    ["Papaya", "Papaya Tree"],
+    ["Quince", "Quince Tree"],
+    ["Raspberry", "Raspberry Bush"],
+    ["Strawberry", "Strawberry Plant"],
+    ["Tangerine", "Tangerine Tree"]
+]
