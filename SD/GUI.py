@@ -32,7 +32,7 @@ for friend in onlineFriends()[:5]:
     friend_button = ctk.CTkButton(
         friends_frame,
         text=f"{friend['username']}\n{friend['game']}",
-        width=200,  # Explicit button width
+        width=200,
         height=50,
         corner_radius=32,
         fg_color="white",
@@ -40,12 +40,12 @@ for friend in onlineFriends()[:5]:
         hover_color="#DDD",
         command=lambda f=friend: printOnlineFriends(f)
     )
-    # Prevent stretching and align to center
+
     friend_button.pack(pady=5, padx=5, anchor="center")
 
 # Container Frame for Other Sections
-sections_container = ctk.CTkFrame(app, width=900, height=500, fg_color="transparent")  # Invisible container
-sections_container.place(x=300, y=100)  # Start from where the first section begins
+sections_container = ctk.CTkFrame(app, width=900, height=500, fg_color="transparent") 
+sections_container.place(x=300, y=100)
 
 # Size for all blocks
 block_width = 250
@@ -56,11 +56,9 @@ SPACING = 10
 most_played_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 most_played_frame.place(x=0, y=0)  # Position within the container
 
-# Label inside the Most Played Section (Centered)
 most_played_label = ctk.CTkLabel(most_played_frame, text="Most Played:", font=("Minecraftia", 16), text_color="black")
 most_played_label.place(relx=0.5, y=5, anchor="n")
 
-# List inside the Most Played Section (Centered)
 most_played_list = ctk.CTkLabel(most_played_frame, text="1. War Thunder\n2. GTA 5\n3. Pokemon", font=("Minecraftia", 14), text_color="black")
 most_played_list.place(relx=0.5, rely=0.5, anchor="center")
 
@@ -68,15 +66,13 @@ most_played_list.place(relx=0.5, rely=0.5, anchor="center")
 recently_played_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 recently_played_frame.place(x=block_width + SPACING, y=0)
 
-# Label inside the Recently Played Section (Centered)
 recently_played_label = ctk.CTkLabel(recently_played_frame, text="Recently Played:", font=("Minecraftia", 16), text_color="black")
 recently_played_label.place(relx=0.5, y=10, anchor="n")
 
-# List inside the Recently Played Section (Centered)
 recently_played_list = ctk.CTkLabel(recently_played_frame, text="Doctor Simulator", font=("Minecraftia", 14), text_color="black")
 recently_played_list.place(relx=0.5, rely=0.5, anchor="center")
 
-# Empty Section 1
+# Steambox Section
 steambox_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 steambox_frame.place(x=0, y=block_height + SPACING)
 
