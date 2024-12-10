@@ -12,6 +12,7 @@ def picoCommand(command, serial_port):
         data = "on\r"
         serial_port.write(data.encode())
         pico_output = read_serial(serial_port)
+        print(pico_output)
         pico_output = pico_output.replace('\r\n', ' ')
         print("[PICO] " + pico_output)
     elif command == "off":
@@ -19,12 +20,8 @@ def picoCommand(command, serial_port):
         data = "off\r"
         serial_port.write(data.encode())
         pico_output = read_serial(serial_port)
+        print(pico_output)
         pico_output = pico_output.replace('\r\n', ' ')
         print("[PICO] " + pico_output)
 
-def find_pico_port():
-    serial_ports = list_ports.comports()
-    for port in serial_ports:
-        if "Pico" in port.description:
-            return port.device
-    return None
+
