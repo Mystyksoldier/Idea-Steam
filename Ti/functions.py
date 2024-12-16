@@ -17,14 +17,29 @@ acd = ADC(Pin(26))
 acd_value = acd.read_u16()
 
 np1 = neopixel.NeoPixel(machine.Pin(2), 30)
-np1b = neopixel.NeoPixel(machine.Pin(2), 30)
-np2 = neopixel.NeoPixel(machine.Pin(3), 30)
 
 SPEED_OF_SOUND = 343
 
 trigger_pin = Pin(14, Pin.OUT)
 echo_pin = Pin(15, Pin.IN)
 
+
+def turn_off_pico():
+    lcd.clear()
+    lcd.move_to(0, 0)
+    lcd.putstr("off")
+    for i in range(30):
+        np1[i] = (0, 0, 0)
+    np1.write()
+
+def run_pico():
+        
+    while True:
+        Show()
+        blink_led()
+        time.sleep(0.1)
+        data = input()
+    
 #Test if reboot was a succes
 def updateConformLed():
     for _ in range(5):
@@ -33,9 +48,15 @@ def updateConformLed():
         led(1)
         time.sleep(.1)
 
+
+def onlineFriends():
+    return [user for user in users if user["status"] == "online"]
+
+OnlineFriendsList = onlineFriends()
+
 #Friends List With lcd
 def CalculateACDPResentage():
-    listNumber = len(fruits)
+    listNumber = len(OnlineFriendsList)
     acd_value = acd.read_u16()
     return (acd_value / 65535) * listNumber - 1
 
@@ -47,11 +68,12 @@ def Show():
 
     if current_number != previous_number:
         previous_number = current_number
+        user = OnlineFriendsList[current_number]
         lcd.clear()
         lcd.move_to(0, 0)
-        lcd.putstr(fruits[current_number][0])
+        lcd.putstr(user["username"])
         lcd.move_to(0, 1)
-        lcd.putstr(fruits[current_number][1])
+        lcd.putstr(user["game"])
         
     
 #the hover lights
@@ -79,28 +101,26 @@ def measure_distance():
     distance = (SPEED_OF_SOUND * elapsed_time) / (2 * 1_000_000)
     return distance
 
+def led():
+    ledcolor = (255, 0, 255)
+    for i in range(30):
+        np1[i] = ledcolor
+        np1.write()
+
 def blink_led():
     if measure_distance() < 0.15:
-        for i in range(29, -1, -1):
+        for i in range(30):
             if i % 2 == 0:
                 np1[i] = (255, 0, 0)
-                np2[i] = (255, 255, 255)
                 np1.write()
-                np2.write()
                 time.sleep(0.1)
-                np1b[i] = (255, 0, 255)
-                np1b.write()
-                time.sleep(0.2)
             else:
                 np1[i] = (0, 255, 255)
-                np2[i] = (255, 0, 255)
                 np1.write()
-                np2.write()
                 time.sleep(0.1)
     else:
         for i in range(30):
             np1[i] = (0, 0, 0)
-            np2[i] = (0, 0, 0)
             np1.write()
-            np2.write()
     
+

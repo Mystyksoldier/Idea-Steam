@@ -1,26 +1,31 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""
-Oriëntatie op TI
-
-Voorbeeld voor communicatie met Raspberry Pi Pico. Flash dit bestand
-eerst naar de Raspberry Pi Pico. Start dan in de folder serial/PC-serial `main.py` op je laptop/PC.
-
-(c) 2022 Hogeschool Utrecht,
-Hagen Patzke (hagen.patzke@hu.nl) en
-Tijmen Muller (tijmen.muller@hu.nl)
-"""
-
-import time
 from functions import *
+import time
 
-updateConformLed()
+turn_off_pico()
+
+status = "off"
 
 while True:
-    Show()
-    blink_led()
-    time.sleep(0.1)
     
-    
+    data = input()
 
+    if data == "on":
+        status = "on"
+    elif data == "off":
+        status = "off"
+        turn_off_pico()
+        
+    while status == "on":
+        Show()
+        blink_led()
+        time.sleep(0.1)
+        
+        # if i add this the functions Show and blink_led will wait until there is a new input()
+        data = input()
+        
+        if data == "off":
+            turn_off_pico()
+            break
+            
+        
+    

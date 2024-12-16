@@ -12,7 +12,6 @@ def picoCommand(command, serial_port):
         data = "on\r"
         serial_port.write(data.encode())
         pico_output = read_serial(serial_port)
-        print(pico_output)
         pico_output = pico_output.replace('\r\n', ' ')
         print("[PICO] " + pico_output)
     elif command == "off":
@@ -20,7 +19,6 @@ def picoCommand(command, serial_port):
         data = "off\r"
         serial_port.write(data.encode())
         pico_output = read_serial(serial_port)
-        print(pico_output)
         pico_output = pico_output.replace('\r\n', ' ')
         print("[PICO] " + pico_output)
 
