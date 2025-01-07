@@ -20,7 +20,7 @@ def find_pico_port():
 
 def pico_control_thread():
     global pico_choice
-    pico_port = "COM9"
+    pico_port = "COM16"
     serial_port = serial.Serial(port=pico_port, baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=1)
     
     print("[INFO] Pico system connected.")
