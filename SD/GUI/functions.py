@@ -1,15 +1,15 @@
-from userdata import users
-import os
-import threading
+from userdata import *
+from session import Session
 import serial
-import time
 from pico_functions import *
+import json
+import subprocess
+import json
+from tkinter import messagebox
+from serial.tools import list_ports
+from database import *
 
-def onlineFriends():
-    return [user for user in users if user["status"] == "online"]
-
-def printOnlineFriends(friend):
-    print(friend["username"])
+session = Session()
 
 def find_pico_port():
     serial_ports = list_ports.comports()
@@ -40,4 +40,36 @@ def picoOnOrOff(command):
         print("Pico is now OFF.")
         pico_control_thread()
     
+
+def load_session_data():
+    try:
+        with open('session_data.json', 'r') as f:
+            session_data = json.load(f)
+            return session_data.get('username', None)
+    except FileNotFoundError:
+        return None
+    
+
+def getData():
+    username = load_session_data()
+    get_steam_data_for_user(username)
+
+def top3games():
+    # Load all game data
+    games = load_game_data()
+
+    # Sort games by playtime in descending order and get the top 3
+    sorted_games = sorted(games, key=lambda x: x[2], reverse=True)[:3]
+
+    # Prepare the top 3 games for display
+    top3games = []
+    for game in sorted_games:
+        game_name = game[1]
+        playtime_hours = game[2]
+        top3games.append(f"{game_name}: {playtime_hours} hrs")
+
+    return "\n".join(top3games)
+
+
+
 

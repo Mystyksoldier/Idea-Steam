@@ -21,8 +21,8 @@ users = [
     {"username": "GameWizard", "status": "online", "game": "World of Warcraft"},
 ]
 
-USER_DATA = {
-    "admin": "123",  # username: password
-    "user1": "mypassword",
-    "user2": "pass2023"
-}
+USER_DATA = [
+    {"id": "1", "username": "admin", "password": "123"},
+    {"id": "2", "username": "user1", "password": "kaas"},
+    {"id": "3", "username": "user2", "password": "kaas"},
+]
