@@ -25,9 +25,9 @@ def pico_control_thread():
     
     print("[INFO] Pico system connected.")
     if pico_choice == "on":
-        picoCommand("on", serial_port)
+        picoCommand(pico_choice, serial_port)
     elif pico_choice == "off":
-        picoCommand("off", serial_port)
+        picoCommand(pico_choice, serial_port)
 
 
 def picoOnOrOff(command):
