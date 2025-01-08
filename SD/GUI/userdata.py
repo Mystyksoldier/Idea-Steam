@@ -20,3 +20,9 @@ users = [
     {"username": "NightWolf", "status": "offline", "game": None},
     {"username": "GameWizard", "status": "online", "game": "World of Warcraft"},
 ]
+
+USER_DATA = {
+    "admin": "123",  # username: password
+    "user1": "mypassword",
+    "user2": "pass2023"
+}
