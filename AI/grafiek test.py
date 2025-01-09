@@ -69,3 +69,4 @@ plt.legend()
 
 # Toon de grafiek
 plt.show()
+
