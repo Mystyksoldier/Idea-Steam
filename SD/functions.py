@@ -1,4 +1,3 @@
-from userdata import *
 from session import Session
 import serial
 from pico_functions import *

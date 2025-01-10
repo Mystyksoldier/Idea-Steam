@@ -1,23 +1,21 @@
-# SMART-doelen voor Steambox
+# Welkom bij het Project IDEA-STEAM
 
-## Specifiek
-De Steambox moet een werkende applicatie zijn die real-time gegevens van Steam kan ophalen en weergeven via een API.
+Welkom bij het **IDEA-STEAM** project! Dit project is gemaakt door:
 
-## Meetbaar
-We kunnen het succes van het project meten door de juiste Steam-gegevens (zoals speelschema’s en gamegedrag) zichtbaar te maken in de Steambox.
+- Dave Havelaar
+- Étiënne Espacia
+- Ilias Mahdad
 
-## Acceptabel
-Dit doel is acceptabel omdat het projectteam akkoord gaat met het concept en de technische haalbaarheid ervan.
+## Structuur van het Project
 
-## Realistisch
-Het is haalbaar, op voorwaarde dat iedereen actief bijdraagt en de benodigde technische onderdelen tijdig worden afgerond. Het team heeft de vereiste kennis om de API te implementeren.
+Om dit project te draaien, moet u via de **/SD** directory gaan en daar de **README.md** lezen voor verdere instructies. 
 
-## Tijdsgebonden
-Het doel is om in week 14, specifiek op maandag, de Steam-gegevens succesvol te integreren en weer te geven binnen de Steambox, zoals gepland.
+Voor de Steam-Box code kunt u terecht in de **/TI** directory. Alle onderdelen van het project zijn uiteindelijk samengevoegd in de **SD** directory, waar de meeste van de belangrijkste code en bestanden zich bevinden.
 
-## SMART
-Op maandag in week 14 willen wij door middel van een API de data van Steam succesvol kunnen integreren en aantonen binnen de Steambox.
+## Installatie en Gebruik
 
-## Etienne hiero. Bij mij werkt het als je dit leest!!
+1. **Start met de SD directory**:
+    - Om het Project te draaien verzoek ik u naar **/SD/README.md** voor installatie- en gebruiksinstructies.
 
-## Dit zou nu moeten werken, groetjes ilias.
+2. **TI directory voor de Steam-Box**:
+    - De **/TI** directory bevat de code voor de Steam-Box.

@@ -1,0 +1,11 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore session data file
+session_data.json
+steam.json
+
+# Other common ignores
+*.log
+*.tmp

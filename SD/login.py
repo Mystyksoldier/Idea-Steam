@@ -18,7 +18,7 @@ def validate_login():
     getData()
 
     app.destroy()
-    subprocess.run(["python", "SD/GUI/Gui.py"])
+    subprocess.run(["python", "SD/Gui.py"])
 
 app = ctk.CTk()
 app.geometry("450x300")
