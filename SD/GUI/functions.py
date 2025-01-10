@@ -3,9 +3,7 @@ from session import Session
 import serial
 from pico_functions import *
 import json
-import subprocess
 import json
-from tkinter import messagebox
 from serial.tools import list_ports
 from database import *
 
@@ -61,14 +59,15 @@ def top3games():
     # Sort games by playtime in descending order and get the top 3
     sorted_games = sorted(games, key=lambda x: x[2], reverse=True)[:3]
 
-    # Prepare the top 3 games for display
+    # Prepare the top 3 games for display with numbering
     top3games = []
-    for game in sorted_games:
+    for index, game in enumerate(sorted_games, start=1):
         game_name = game[1]
         playtime_hours = game[2]
-        top3games.append(f"{game_name}: {playtime_hours} hrs")
+        top3games.append(f"{index}. {game_name}: {playtime_hours} hrs")  # Add numbering to each game
 
-    return "\n".join(top3games)
+    return top3games
+
 
 
 

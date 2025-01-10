@@ -16,7 +16,6 @@ def gemiddelde_uren(uren):
     aantal_personen = len(uren)
     return som_uren / aantal_personen
 
-
 # Voorbeelddata
 online_uren = [3, 4, 2, 5, 6]
 print("Gemiddelde:", gemiddelde_uren(online_uren))

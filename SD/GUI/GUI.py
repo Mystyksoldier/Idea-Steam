@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from functions import *
 from database import *
+from graph import *
 import json
 
 session = Session()
@@ -24,8 +25,8 @@ navbar_title.place(x=20, y=15)
 user_label = ctk.CTkLabel(navbar, text=username, font=("Minecraftia", 16), width=120, height=30, fg_color="white", text_color="black")
 user_label.place(x=730, y=15)
 
-menu_button = ctk.CTkButton(navbar, text="☰", width=40, height=30, fg_color="white", text_color="black", corner_radius=5, hover_color="#ccc")
-menu_button.place(x=860, y=15)
+exit_button = ctk.CTkButton(navbar, text="Exit", width=40, height=30, fg_color="red", text_color="white", corner_radius=10, command=exit)
+exit_button.place(x=860, y=15)
 
 # Friends Online Section
 friends_frame = ctk.CTkFrame(app, width=300, height=500, fg_color="#3A2352")
@@ -65,24 +66,28 @@ SPACING = 10
 
 # Most Played Section
 most_played_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
-most_played_frame.place(x=0, y=0)  # Position within the container
+most_played_frame.place(x=0, y=0)
 
-most_played_label = ctk.CTkLabel(most_played_frame, text="Most Played:", font=("Minecraftia", 16), text_color="black")
-most_played_label.place(relx=0.5, y=5, anchor="n")
+most_played_label = ctk.CTkLabel(most_played_frame, text="Most Played Games:", font=("Minecraftia", 18), text_color="black")
+most_played_label.place(relx=0.5, y=15, anchor="n")  # Better spacing from the top
 
-# Get the top 3 most played games and update the label text
-most_played_list = ctk.CTkLabel(most_played_frame, text=top3games(), font=("Minecraftia", 14), text_color="black")
-most_played_list.place(relx=0.5, rely=0.5, anchor="center")
+top_games = top3games()
+
+# Display the top 3 games
+for idx, game in enumerate(top_games):
+    label = ctk.CTkLabel(most_played_frame, text=game, font=("Minecraftia", 14), text_color="black")
+    label.place(x=10, y=50 + (idx * 30))
 
 # Recently Played Section
 recently_played_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 recently_played_frame.place(x=block_width + SPACING, y=0)
 
-recently_played_label = ctk.CTkLabel(recently_played_frame, text="Recently Played:", font=("Minecraftia", 16), text_color="black")
+recently_played_label = ctk.CTkLabel(recently_played_frame, text="Price vs Playtime", font=("Minecraftia", 16), text_color="black")
 recently_played_label.place(relx=0.5, y=10, anchor="n")
 
-recently_played_list = ctk.CTkLabel(recently_played_frame, text="Doctor Simulator", font=("Minecraftia", 14), text_color="black")
-recently_played_list.place(relx=0.5, rely=0.5, anchor="center")
+# Button to open the graph
+graph_button = ctk.CTkButton(recently_played_frame, text="Show Graph", command=open_graph_window)
+graph_button.place(relx=0.5, rely=0.6, anchor="center")
 
 # Steambox Section
 steambox_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
@@ -101,4 +106,9 @@ steambox_offButton.place(relx=0.72, rely=0.5, anchor="center")
 empty_section2 = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 empty_section2.place(x=block_width + SPACING, y=block_height + SPACING)
 
+# Label to display calculate_statistics() output
+statistics_label = ctk.CTkLabel(empty_section2, text=calculate_statistics(), font=("Minecraftia", 14), text_color="black")
+statistics_label.place(relx=0.5, rely=0.5, anchor="center")
+
+# Start the Tkinter event loop
 app.mainloop()

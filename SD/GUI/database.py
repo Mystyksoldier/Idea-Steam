@@ -283,3 +283,54 @@ def load_game_data():
         if conn:
             cursor.close()  # Close the cursor
             conn.close()  # Close the connection
+
+def fetch_playtime_data(db_config):
+    """
+    Haalt de speeltijden van spellen op uit de PostgreSQL-database.
+    """
+    try:
+        # Maak verbinding met de database
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+
+        # Haal speeltijdgegevens op
+        cursor.execute("SELECT playtime_hours FROM steam_games")
+        rows = cursor.fetchall()
+
+        # Converteer rijen naar een lijst met integers
+        playtimes = [row[0] for row in rows if row[0] is not None]
+
+        return playtimes
+
+    except Exception as e:
+        print(f"Fout bij het ophalen van gegevens: {e}")
+        return []
+
+    finally:
+        if conn:
+            cursor.close()
+            conn.close()
+
+def calculate_statistics():
+    """
+    Bereken het gemiddelde en de mediaan van een lijst met speeltijden zonder externe bibliotheken.
+    """
+
+    playtimes = fetch_playtime_data(POSTGRESQL_CONFIG)
+
+    if not playtimes:
+        print("Geen gegevens beschikbaar om statistieken te berekenen.")
+        return None, None
+
+    # Bereken gemiddelde
+    mean_playtime = sum(playtimes) / len(playtimes)
+
+    # Bereken mediaan
+    sorted_playtimes = sorted(playtimes)
+    n = len(sorted_playtimes)
+    if n % 2 == 0:
+        median_playtime = (sorted_playtimes[n // 2 - 1] + sorted_playtimes[n // 2]) / 2
+    else:
+        median_playtime = sorted_playtimes[n // 2]
+
+    return mean_playtime, median_playtime
