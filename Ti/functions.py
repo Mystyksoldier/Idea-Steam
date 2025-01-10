@@ -3,6 +3,7 @@ from pico_i2c_lcd import I2cLcd
 import time
 import machine
 import neopixel
+import sys
 from data import *
 
 led = Pin("LED", Pin.OUT)
@@ -11,6 +12,16 @@ time.sleep(0.5)
 i2c = I2C(0, sda=Pin(0), scl=Pin(1), freq=400000)
 I2C_ADDR = i2c.scan()[0]
 lcd = I2cLcd(i2c, I2C_ADDR, 2, 16)
+
+i2c_1 = I2C(1, sda=Pin(6), scl=Pin(7), freq=400000)
+I2C_ADDR_1 = i2c_1.scan()[0]
+lcd_1 = I2cLcd(i2c_1, I2C_ADDR_1, 2, 16)
+
+
+
+rbutton = Pin(12, Pin.IN, pull=Pin.PULL_DOWN)
+
+lbutton = Pin(13, Pin.IN, pull=Pin.PULL_DOWN)
 
 acd = ADC(Pin(26))
 
@@ -23,22 +34,15 @@ SPEED_OF_SOUND = 343
 trigger_pin = Pin(14, Pin.OUT)
 echo_pin = Pin(15, Pin.IN)
 
-
 def turn_off_pico():
+    global previous_number
+    previous_number = -1
     lcd.clear()
-    lcd.move_to(0, 0)
-    lcd.putstr("off")
+    lcd_1.clear()
+    lcd.hal_backlight_off
     for i in range(30):
         np1[i] = (0, 0, 0)
     np1.write()
-
-def run_pico():
-        
-    while True:
-        Show()
-        blink_led()
-        time.sleep(0.1)
-        data = input()
     
 #Test if reboot was a succes
 def updateConformLed():
@@ -49,14 +53,14 @@ def updateConformLed():
         time.sleep(.1)
 
 
-def onlineFriends():
-    return [user for user in users if user["status"] == "online"]
+def getFriends():
+    return [friend for friend in friends if friend["friend_status"] == "Online"]
 
-OnlineFriendsList = onlineFriends()
+FriendsList = getFriends()
 
 #Friends List With lcd
 def CalculateACDPResentage():
-    listNumber = len(OnlineFriendsList)
+    listNumber = len(FriendsList)
     acd_value = acd.read_u16()
     return (acd_value / 65535) * listNumber - 1
 
@@ -66,16 +70,15 @@ def Show():
     global previous_number
     current_number = int(CalculateACDPResentage())
 
-    if current_number != previous_number:
+    if current_number != previous_number: #prevstate != on
         previous_number = current_number
-        user = OnlineFriendsList[current_number]
+        friend = FriendsList[current_number]
         lcd.clear()
         lcd.move_to(0, 0)
-        lcd.putstr(user["username"])
+        lcd.putstr(friend["friend_name"])
         lcd.move_to(0, 1)
-        lcd.putstr(user["game"])
+        lcd.putstr(friend["current_game"])
         
-    
 #the hover lights
     
 def measure_distance():
@@ -119,8 +122,54 @@ def blink_led():
                 np1.write()
                 time.sleep(0.1)
     else:
-        for i in range(30):
-            np1[i] = (0, 0, 0)
-            np1.write()
-    
+        led()
+        
+        
+number = 0
 
+
+sensor = machine.ADC(4)
+
+def read_temperature():
+    adc_value = sensor.read_u16()
+    volt = (3.3/65535) * adc_value            
+    temperature = 27 - (volt - 0.706) / 0.001721
+    return int(temperature)
+
+
+def lcd_temp():
+    lcd_1.clear()
+    lcd_1.move_to(1, 0)
+    lcd_1.putstr("Steam Box temp") 
+    lcd_1.move_to(2, 1)
+    lcd_1.putstr(f"{read_temperature()}°C")
+    
+def cpu_temp():
+    lcd_1.clear()
+    lcd_1.move_to(2, 0)
+    lcd_1.putstr("CPU temp") 
+    lcd_1.move_to(2, 1)
+    lcd_1.putstr("70°C")
+
+def gpu_temp():
+    lcd_1.clear()
+    lcd_1.move_to(2, 0)
+    lcd_1.putstr("GPU temp") 
+    lcd_1.move_to(2, 1)
+    lcd_1.putstr("65°C")
+    
+functions = [lcd_temp, cpu_temp, gpu_temp]
+
+current_function_index = 0
+
+def menuOptions():
+    global current_function_index
+    
+    if rbutton.value():
+        current_function_index = (current_function_index + 1) % len(functions)
+        functions[current_function_index]()
+    
+    if lbutton.value():
+        current_function_index = (current_function_index - 1) % len(functions)
+        functions[current_function_index]()
+        

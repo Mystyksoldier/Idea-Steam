@@ -1,31 +1,35 @@
 from functions import *
+from database import *
 import time
+import select
+import sys
+import machine
+
 
 turn_off_pico()
+data = "off"
 
-status = "off"
+def usb_any():
+    rlist, _, _ = select.select([sys.stdin], [], [], 0)  # Non-blocking check
+    return bool(rlist)
 
 while True:
-    
-    data = input()
-
-    if data == "on":
-        status = "on"
-    elif data == "off":
-        status = "off"
-        turn_off_pico()
         
-    while status == "on":
+    if data != "on":
+        data = input()
+    
+    if data == "on":
+
         Show()
         blink_led()
-        time.sleep(0.1)
-        
-        # if i add this the functions Show and blink_led will wait until there is a new input()
-        data = input()
-        
-        if data == "off":
-            turn_off_pico()
-            break
-            
-        
+        menuOptions()
+
+        if usb_any():
+            data = input()
+        else:
+            continue
+       
+    if data == "off":
+        print("Received off")
+        turn_off_pico()
     
