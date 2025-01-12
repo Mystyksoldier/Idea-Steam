@@ -55,7 +55,7 @@ for friend in onlineFriends()[:5]:  # Only show the first 5 friends
 
     friend_button.pack(pady=5, padx=5, anchor="center")
 
-# Container Frame for Other Sections
+# Container Frame for all Sections
 sections_container = ctk.CTkFrame(app, width=900, height=500, fg_color="transparent") 
 sections_container.place(x=300, y=100)
 
@@ -78,7 +78,7 @@ for idx, game in enumerate(top_games):
     label = ctk.CTkLabel(most_played_frame, text=game, font=("Minecraftia", 14), text_color="black")
     label.place(x=10, y=50 + (idx * 30))
 
-# Recently Played Section
+# Graph Section
 recently_played_frame = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 recently_played_frame.place(x=block_width + SPACING, y=0)
 
@@ -102,7 +102,7 @@ steambox_onButton.place(relx=0.28, rely=0.5, anchor="center")
 steambox_offButton = ctk.CTkButton(steambox_frame, text="OFF", width=100, height=50, fg_color="red", text_color="black", corner_radius=32, command=lambda: picoOnOrOff("off"))
 steambox_offButton.place(relx=0.72, rely=0.5, anchor="center")
 
-# Empty Section 2
+# statistics Section 
 empty_section2 = ctk.CTkFrame(sections_container, width=block_width, height=block_height, fg_color="white")
 empty_section2.place(x=block_width + SPACING, y=block_height + SPACING)
 
