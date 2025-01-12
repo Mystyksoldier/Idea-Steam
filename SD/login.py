@@ -23,7 +23,7 @@ def validate_login():
 app = ctk.CTk()
 app.geometry("450x300")
 app.title("IDEA STEAM")
-app.configure(bg="#472D5B", fg_color="#5b2d54")
+app.configure(bg="#2a475e", fg_color="#2a475e")
 
 # Title Label
 title_label = ctk.CTkLabel(app, text="Login", font=("Minecraftia", 24), text_color="white")
