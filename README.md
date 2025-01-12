@@ -7,12 +7,12 @@ Welkom bij het **IDEA-STEAM** project! Dit project is gemaakt door:
   *GitHub*: [Mystyksoldier](https://github.com/Mystyksoldier)
 
 - **Étiënne Espacia**  
-  *Studentnummer*:  
-  *GitHub*: []()
+  *Studentnummer*: 1876943 
+  *GitHub*: [Ploeqie](https://github.com/Ploeqie)
 
 - **Ilias Mahdad**  
-  *Studentnummer*:  
-  *GitHub*: []()
+  *Studentnummer*:  1836587
+  *GitHub*: [trojanili](https://github.com/trojanili)
 
 Het project is een samenwerking met Valve om interactieve componenten toe te voegen aan Steam. Dit gebeurt met behulp van een softwareapplicatie (GUI) en een hardware-accessoire (Steam-Box). Beide maken gebruik van data die uit een database wordt gehaald. Deze database wordt gevuld met gegevens die via een API worden opgehaald en vervolgens in de applicatie worden weergegeven.
 
